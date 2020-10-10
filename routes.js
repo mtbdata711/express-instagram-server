@@ -1,17 +1,11 @@
 const routes = require("express").Router();
-const { createFeed } = require("./src/common/crud");
-const { Feed } = require("./src/models");
+const { createFeed, getFeed, getAllFeeds } = require("./src/common/crud");
 
 routes.get("/feed/:username", async (request, response) => {
-  const username = request.params.username;
+  const username = request.params.username.toLowerCase();
   let feed;
   try {
-    feed = await Feed.findOne({
-      where: { username: username },
-      attributes: {
-        exclude: ["access_token"],
-      },
-    });
+    feed = await getFeed(username);
   } catch (error) {
     response.status(400).json({ status: "error", data: error.message });
   }
@@ -29,11 +23,7 @@ routes.get("/feed/:username", async (request, response) => {
 routes.get("/feeds/all", async (request, response) => {
   let feeds;
   try {
-    feeds = await Feed.findAll({
-      attributes: {
-        exclude: ["access_token"],
-      },
-    });
+    feeds = await getAllFeeds();
   } catch (error) {
     response.status(400).json({ status: "error", data: error.message });
   }

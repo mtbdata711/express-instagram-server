@@ -24,7 +24,7 @@ const createFeed = async (code) => {
   }
 
   const feed = await Feed.create({
-    username: posts[0].username,
+    username: posts[0].username.toLowerCase(),
     last_updated_token: new Date().toISOString(),
     status: "ok",
     last_error: null,
@@ -73,4 +73,43 @@ const updateAccessToken = async (accessToken, id) => {
   return updatedFeed.get();
 };
 
-module.exports = { createFeed, updateFeed, updateAccessToken };
+const getFeed = async (username) => {
+  let feed;
+  try {
+    feed = await Feed.findOne({
+      where: { username },
+      attributes: {
+        exclude: ["access_token"],
+      },
+    });
+  } catch (error) {
+    await createLog("error", error.message);
+    throw new Error(error.message);
+  }
+
+  return feed;
+};
+
+const getAllFeeds = async () => {
+  let feeds;
+  try {
+    feeds = await Feed.findAll({
+      attributes: {
+        exclude: ["access_token"],
+      },
+    });
+  } catch (error) {
+    await createLog("error", error.message);
+    throw new Error(error.message);
+  }
+
+  return feeds;
+};
+
+module.exports = {
+  createFeed,
+  updateFeed,
+  updateAccessToken,
+  getFeed,
+  getAllFeeds,
+};
