@@ -1,5 +1,5 @@
 const routes = require("express").Router();
-const { createFeed } = require("./src/common/CRUD");
+const { createFeed } = require("./src/common/crud");
 const { Feed } = require("./src/models");
 
 routes.get("/feed/:username", async (request, response) => {
