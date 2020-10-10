@@ -11,7 +11,7 @@ routes.get("/feed/:username", async (request, response) => {
   }
 
   if (!feed) {
-    feed = { status: "error", data: "User not found" };
+    feed = "User not found";
     response.status(404);
   } else {
     response.status(200);
