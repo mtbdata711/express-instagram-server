@@ -39,7 +39,7 @@ const getShortLivedToken = async (code) => {
     client_id: process.env.APP_ID,
     client_secret: process.env.APP_SECRET,
     grant_type: "authorization_code",
-    redirect_uri: "https://localhost:8443/instagram-redirect",
+    redirect_uri: process.env.REDIRECT_URI,
     code: code,
   };
 
