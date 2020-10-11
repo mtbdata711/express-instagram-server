@@ -5,13 +5,13 @@ const Logger = Database.define(
   "logger",
   {
     type: {
-      type: Sequelize.STRING,
+      type: Sequelize.TEXT,
     },
     message: {
-      type: Sequelize.STRING,
+      type: Sequelize.TEXT,
     },
     feedID: {
-      type: Sequelize.NUMBER,
+      type: Sequelize.INTEGER,
       allowNull: true,
     },
   },

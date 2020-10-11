@@ -4,22 +4,22 @@ const { Database } = require("../database");
 
 const Feed = Database.define("feed", {
   username: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
   },
   access_token: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
   },
   last_updated_token: {
     type: Sequelize.DATE,
   },
   status: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
   },
   last_error: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
   },
   data: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     get() {
       return JSON.parse(this.getDataValue("data"));
     },
