@@ -7,7 +7,7 @@ APIRequest = new APIRequest();
  * Fetch latest posts from Instagram API
  *
  * @param string Instagram accounts access token
- * @return object|error returns object containing feed data. Includes next() method to fetch next page if property
+ * @return object|error returns object containing feed data. Includes nextPage() method to fetch next page if property
  * exists. Throws error on fetch failure.
  */
 const getPosts = async (accessToken) => {
@@ -110,7 +110,7 @@ const getRefreshedToken = async (previousToken) => {
  * Fetch next page of posts from Instagram API from URL in next paging property from response
  *
  * @param string next page URL from Instagram API response
- * @return object|error returns object containing feed data. Includes next() method to fetch next page if property
+ * @return object|error returns object containing feed data. Includes nextPage() method to fetch next page if property
  * exists. Throws error on fetch failure.
  */
 const getNextPage = async (url) => {
@@ -124,11 +124,11 @@ const getNextPage = async (url) => {
 };
 
 /**
- * Fetch and validate posts from Instagram API. Creates and exposes next() method if property exists in API response.
+ * Fetch and validate posts from Instagram API. Creates and exposes nextPage() method if property exists in API response.
  *
  * @param string Instagram API endpoint url
  * @param object object of params to append to base url in fetch request
- * @return object|error returns object containing feed data. Includes next() method to fetch next page if property
+ * @return object|error returns object containing feed data. Includes nextPage() method to fetch next page if property
  * exists. Throws error on fetch failure.
  */
 const getInstagramPostsFromAPI = async (url, params) => {

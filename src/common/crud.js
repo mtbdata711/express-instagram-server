@@ -9,14 +9,13 @@ const { getDateString } = require("../utils/helpers");
 const { createLog } = require("../utils/log");
 
 const createFeed = async (code) => {
-  let posts;
+  let postsObject;
   let longLivedToken;
 
   try {
     const shortLivedToken = await getShortLivedToken(code);
     longLivedToken = await getLongLivedToken(shortLivedToken);
-    posts = await getPosts(longLivedToken);
-    posts = posts.data;
+    postsObject = await getPosts(longLivedToken);
   } catch (error) {
     // log error && send error back to client
     await createLog("error", error.message);
@@ -24,12 +23,12 @@ const createFeed = async (code) => {
   }
 
   const feed = await Feed.create({
-    username: posts[0].username.toLowerCase(),
-    last_updated_token: new Date().toISOString(),
+    username: postsObject.username,
+    last_updated_token: getDateString(),
     status: "ok",
     last_error: null,
     access_token: longLivedToken,
-    data: posts,
+    data: postsObject.data,
   });
 
   return feed.get();

@@ -3,7 +3,7 @@ class InstagramFeed{
     constructor(data, nextPageFunction){
         this.data = data.data;
         this.count = this.setCount();
-        this.account = this.setAccount();
+        this.username = this.setUsername();
         this.nextPageUrl = data.paging.next;
         this.nextPageFunction = nextPageFunction;
     }
@@ -16,7 +16,7 @@ class InstagramFeed{
         return this.data.length;
     }
 
-    setAccount(){
+    setUsername(){
         return this.data[0].username
     }
 }
