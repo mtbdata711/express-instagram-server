@@ -8,6 +8,7 @@ routes.get("/feed/:username", async (request, response) => {
     feed = await getFeed(username);
   } catch (error) {
     response.status(400).json({ status: "error", data: error.message });
+    return;
   }
 
   if (!feed) {
@@ -26,6 +27,7 @@ routes.get("/feeds/all", async (request, response) => {
     feeds = await getAllFeeds();
   } catch (error) {
     response.status(400).json({ status: "error", data: error.message });
+    return;
   }
 
   response.status(200).json({ status: "ok", data: feeds });
@@ -42,8 +44,8 @@ routes.get("/instagram-redirect", async (request, response) => {
       status: "error",
       data: { message: error.message },
     });
+    return;
   }
-
   response.status(200);
   response.json({
     status: "ok",
