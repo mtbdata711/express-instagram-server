@@ -7,7 +7,7 @@ const createLog = async (type, message, feedID = null) => {
     feedID,
   });
 
-  if (feedID) {
+  if (feedID && "error" === type) {
     await logFeedError(JSON.stringify(newLog.get()), feedID);
   }
 
