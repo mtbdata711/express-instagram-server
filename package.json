@@ -8,6 +8,7 @@
     "pretty": "prettier --write \"./**/*.{js,jsx,json}\""
   },
   "devDependencies": {
+    "heroku": "^7.45.0",
     "nodemon": "^2.0.4",
     "prettier": "^2.1.2"
   },
@@ -21,5 +22,8 @@
     "sqlite3": "^5.0.0"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "engines": {
+    "node": "12.6"
+  }
 }
