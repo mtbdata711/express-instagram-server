@@ -4,7 +4,7 @@ const { Feed } = require("../models");
 const { createLog } = require("../utils/log");
 const cron = require("node-cron");
 
-// Update last updated feed every 30 minutes
+// Update last updated feed every 10 minutes
 cron.schedule("*/10 * * * *", async () => {
   const feedToUpdate = await getLastUpdatedByField(Feed, "updatedAt");
 
@@ -19,7 +19,7 @@ cron.schedule("*/10 * * * *", async () => {
   } catch (error) {
     console.error(error);
     createLog(
-      "cron",
+      "error",
       `❌ Updating feed for ${feedToUpdate.username} failed with error: ${error.message}`,
       feedToUpdate.id
     );
@@ -50,7 +50,7 @@ cron.schedule("0 0 * * *", async () => {
   } catch (error) {
     console.error(error);
     createLog(
-      "cron",
+      "error",
       `❌ Updating access token for ${feedToUpdate.username} failed with error: ${error.message}`,
       feedToUpdate.id
     );

@@ -6,7 +6,7 @@ const {
 } = require("./InstagramAPI");
 const { Feed } = require("../models");
 const { getDateString } = require("../utils/helpers");
-const { logFeedError, createLog } = require("../utils/log");
+const { createLog } = require("../utils/log");
 
 const createFeed = async (code) => {
   let posts;
@@ -41,7 +41,7 @@ const updateFeed = async (accessToken, id) => {
     posts = await getPosts(accessToken);
     posts = posts.data;
   } catch (error) {
-    logFeedError(error.message, id);
+    createLog("error", error.message, id);
     throw new Error(error.message);
   }
 
@@ -49,7 +49,7 @@ const updateFeed = async (accessToken, id) => {
     where: { id },
   });
 
-  const updatedFeed = await feedToUpdate.update({ data: posts });
+  const updatedFeed = await feedToUpdate.update({ data: posts, status: "ok" });
   return updatedFeed.get();
 };
 
@@ -58,7 +58,7 @@ const updateAccessToken = async (accessToken, id) => {
   try {
     updatedToken = await getRefreshedToken(accessToken);
   } catch (error) {
-    logFeedError(error.message, id);
+    createLog("error", error.message, id);
     throw new Error(error.message);
   }
 
@@ -69,6 +69,7 @@ const updateAccessToken = async (accessToken, id) => {
   const updatedFeed = await feedToUpdate.update({
     access_token: updatedToken,
     last_updated_token: getDateString(),
+    status: "ok",
   });
   return updatedFeed.get();
 };

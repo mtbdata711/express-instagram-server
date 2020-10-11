@@ -1,5 +1,6 @@
-let { APIRequest } = require("./APIRequest");
 const { validatePosts, getFields } = require("../utils/helpers");
+let { APIRequest } = require("./APIRequest");
+APIRequest = new APIRequest();
 
 /**
  * Fetch latest posts from Instagram API
@@ -44,8 +45,7 @@ const getShortLivedToken = async (code) => {
   };
 
   try {
-    response = await APIRequest(
-      "POST",
+    response = await APIRequest.post(
       "https://api.instagram.com/oauth/access_token",
       options
     );
@@ -70,8 +70,7 @@ const getLongLivedToken = async (shortAccessToken) => {
     grant_type: "ig_exchange_token",
   };
   try {
-    response = await APIRequest(
-      "GET",
+    response = await APIRequest.get(
       "https://graph.instagram.com/access_token",
       options
     );
@@ -95,8 +94,7 @@ const getRefreshedToken = async (previousToken) => {
     grant_type: "ig_refresh_token",
   };
   try {
-    response = await APIRequest(
-      "GET",
+    response = await APIRequest.get(
       "https://graph.instagram.com/refresh_access_token",
       options
     );
@@ -135,7 +133,7 @@ const getNextPage = async (url) => {
 const getInstagramPostsFromAPI = async (url, params) => {
   let response;
   try {
-    response = await APIRequest("GET", url, params);
+    response = await APIRequest.get(url, params);
   } catch (error) {
     throw new Error(error.message);
   }
