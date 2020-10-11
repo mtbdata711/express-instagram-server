@@ -1,4 +1,5 @@
 const { validatePosts, getFields } = require("../utils/helpers");
+const { InstagramFeed } = require("./InstagramFeed");
 let { APIRequest } = require("./APIRequest");
 APIRequest = new APIRequest();
 
@@ -142,14 +143,7 @@ const getInstagramPostsFromAPI = async (url, params) => {
     throw new Error("Invalid object keys returned from API");
   }
 
-  const postsObject = {
-    data: response.data,
-  };
-
-  if (response.paging.hasOwnProperty("next")) {
-    postsObject.next = async () => getNextPage(response.paging.next);
-  }
-  return postsObject;
+  return new InstagramFeed(response);
 };
 
 module.exports = {
@@ -157,4 +151,5 @@ module.exports = {
   getShortLivedToken,
   getLongLivedToken,
   getRefreshedToken,
+  getNextPage,
 };

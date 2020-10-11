@@ -3,7 +3,7 @@ const {
   getLongLivedToken,
   getPosts,
   getRefreshedToken,
-} = require("./InstagramAPI");
+} = require("../api/InstagramAPI");
 const { Feed } = require("../models");
 const { getDateString } = require("../utils/helpers");
 const { createLog } = require("../utils/log");
