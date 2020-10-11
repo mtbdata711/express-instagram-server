@@ -143,7 +143,7 @@ const getInstagramPostsFromAPI = async (url, params) => {
     throw new Error("Invalid object keys returned from API");
   }
 
-  return new InstagramFeed(response);
+  return new InstagramFeed(response, getNextPage);
 };
 
 module.exports = {
@@ -151,5 +151,4 @@ module.exports = {
   getShortLivedToken,
   getLongLivedToken,
   getRefreshedToken,
-  getNextPage,
 };
