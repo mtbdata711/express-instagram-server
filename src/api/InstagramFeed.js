@@ -1,4 +1,5 @@
 const { getNextPage } = require("./InstagramAPI");
+
 class InstagramFeed{
 
     constructor(data){
@@ -6,10 +7,6 @@ class InstagramFeed{
         this.count = this.setCount();
         this.account = this.setAccount();
         this.nextPageUrl = data.paging.next;
-    }
-
-    count(){
-        return this.count;
     }
 
     nextPage(){
