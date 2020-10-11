@@ -17,7 +17,7 @@ class InstagramFeed{
     }
 
     setUsername(){
-        return this.data[0].username
+        return this.data[0].username.toLowerCase();
     }
 }
 
